@@ -44,6 +44,10 @@ public class FF7ConfigFile
 
 	public int IsFirstBoot = 1;
 
+	public int Launch7thHeaven = 0;
+
+	public int BypassLauncher = 0;
+
 	public static string GameSettingFolder
 	{
 		get
@@ -151,6 +155,10 @@ public class FF7ConfigFile
 			streamWriter.WriteLine(value);
 			value = $"brightness\t\t{Brightness}";
 			streamWriter.WriteLine(value);
+			value = $"launch7thheaven\t{Launch7thHeaven}";
+			streamWriter.WriteLine(value);
+			value = $"bypasslauncher\t{BypassLauncher}";
+			streamWriter.WriteLine(value);
 		}
 		return true;
 	}
@@ -198,6 +206,14 @@ public class FF7ConfigFile
 			else if (string.Equals(array[0], "brightness"))
 			{
 				Brightness = int.Parse(array[1]);
+			}
+			else if (string.Equals(array[0], "launch7thheaven"))
+			{
+				Launch7thHeaven = int.Parse(array[1]);
+			}
+			else if (string.Equals(array[0], "bypasslauncher"))
+			{
+				BypassLauncher = int.Parse(array[1]);
 			}
 		}
 	}

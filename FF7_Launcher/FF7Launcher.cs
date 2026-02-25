@@ -121,6 +121,10 @@ public class FF7Launcher : Form
 
 	private IContainer components = null;
 
+	private CheckBox chkLaunch7thHeaven;
+
+	private CheckBox chkBypassLauncher;
+
 	private Button playBtn;
 
 	private Button settingBtn;
@@ -235,6 +239,7 @@ public class FF7Launcher : Form
 		CustomExitButton.OnNeedRepaint += OnNeedRepaint;
 		CustomExitButton.OnMouseHover += CustomButton_OnMouseHover;
 		ButtonList.Add(CustomExitButton);
+		InitializeCheckboxes();
 		base.MouseDown += FF7Launcher_MouseDown;
 		ImageSizeBound = base.Bounds;
 		OriginalBound = base.Bounds;
@@ -266,6 +271,68 @@ public class FF7Launcher : Form
 		ExitButton.BackgroundImage = BTN_Exit_00_Deactive;
 		FocusOnlyOne(controlIndex);
 		Invalidate();
+	}
+
+	private void InitializeCheckboxes()
+	{
+		chkBypassLauncher = new CheckBox
+		{
+			Text = "Bypass Launcher",
+			Location = new Point(763, 620),
+			AutoSize = true,
+			ForeColor = Color.White,
+			BackColor = Color.Transparent,
+			Checked = configFile.BypassLauncher == 1
+		};
+		chkBypassLauncher.CheckedChanged += (s, e) =>
+		{
+			configFile.BypassLauncher = chkBypassLauncher.Checked ? 1 : 0;
+			configFile.Write("config.txt");
+		};
+		Controls.Add(chkBypassLauncher);
+		string seventhHeavenPath = Get7thHeavenPath();
+		if (seventhHeavenPath != null)
+		{
+			chkLaunch7thHeaven = new CheckBox
+			{
+				Text = "Launch 7th Heaven",
+				Location = new Point(763, 640),
+				AutoSize = true,
+				ForeColor = Color.White,
+				BackColor = Color.Transparent,
+				Checked = configFile.Launch7thHeaven == 1
+			};
+			chkLaunch7thHeaven.CheckedChanged += (s, e) =>
+			{
+				configFile.Launch7thHeaven = chkLaunch7thHeaven.Checked ? 1 : 0;
+				configFile.Write("config.txt");
+			};
+			Controls.Add(chkLaunch7thHeaven);
+		}
+	}
+
+	private static string Get7thHeavenPath()
+	{
+		try
+		{
+			using (var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\{E66AE545-C285-4B8C-8BD0-67282E160BF4}_is1"))
+			{
+				if (key != null)
+				{
+					string installLocation = key.GetValue("InstallLocation") as string;
+					if (!string.IsNullOrEmpty(installLocation))
+					{
+						string exePath = Path.Combine(installLocation, "7th Heaven.exe");
+						if (File.Exists(exePath))
+						{
+							return exePath;
+						}
+					}
+				}
+			}
+		}
+		catch { }
+		return File.Exists("7thHeaven.exe") ? "7thHeaven.exe" : null;
 	}
 
 	private void CustomButton_OnMouseHover(object sender, EventArgs e)
@@ -869,11 +936,31 @@ public class FF7Launcher : Form
 	private void StartGame()
 	{
 		ActivateLauncher(isActive: false);
-		if (!launch_FF7Launcher())
+		if (configFile.Launch7thHeaven == 1 && Get7thHeavenPath() != null)
+		{
+			Launch7thHeaven();
+		}
+		else if (!launch_FF7Launcher())
 		{
 		}
 		FocusOnlyOne(0);
 		ActivateLauncher(isActive: true);
+	}
+
+	private void Launch7thHeaven()
+	{
+		try
+		{
+			string path = Get7thHeavenPath();
+			if (path != null)
+			{
+				Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
+			}
+		}
+		catch (Exception ex)
+		{
+			MessageBox.Show("Failed to launch 7th Heaven: " + ex.Message, Program.Title);
+		}
 	}
 
 	private static async void SleepAsync()
