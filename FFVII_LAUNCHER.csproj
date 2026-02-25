@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <AssemblyName>FFVII_LAUNCHER</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x86</PlatformTarget>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="FF7_Launcher.Resources.cancel.wav" />
+    <None Remove="FF7_Launcher.Resources.cursor.wav" />
+    <None Remove="FF7_Launcher.Resources.decide.wav" />
+    <EmbeddedResource Include="FF7_Launcher.FF7Launcher.resx" />
+    <EmbeddedResource Include="FF7_Launcher.Setting.resx" />
+    <EmbeddedResource Include="FF7_Launcher.Properties.Resources.resx" />
+    <EmbeddedResource Include="FF7_Launcher.Resources.cancel.wav" LogicalName="FF7_Launcher.Resources.cancel.wav" />
+    <EmbeddedResource Include="FF7_Launcher.Resources.cursor.wav" LogicalName="FF7_Launcher.Resources.cursor.wav" />
+    <EmbeddedResource Include="FF7_Launcher.Resources.decide.wav" LogicalName="FF7_Launcher.Resources.decide.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SharpDX.DirectInput">
+      <HintPath>D:\SteamLibrary\steamapps\common\FINAL FANTASY VII Steam Edition\SharpDX.DirectInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX">
+      <HintPath>D:\SteamLibrary\steamapps\common\FINAL FANTASY VII Steam Edition\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DirectSound">
+      <HintPath>D:\SteamLibrary\steamapps\common\FINAL FANTASY VII Steam Edition\SharpDX.DirectSound.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput">
+      <HintPath>D:\SteamLibrary\steamapps\common\FINAL FANTASY VII Steam Edition\SharpDX.XInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11">
+      <HintPath>D:\SteamLibrary\steamapps\common\FINAL FANTASY VII Steam Edition\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>D:\SteamLibrary\steamapps\common\FINAL FANTASY VII Steam Edition\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Desktop">
+      <HintPath>D:\SteamLibrary\steamapps\common\FINAL FANTASY VII Steam Edition\SharpDX.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WinMM">
+      <HintPath>D:\SteamLibrary\steamapps\common\FINAL FANTASY VII Steam Edition\NAudio.WinMM.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Core">
+      <HintPath>D:\SteamLibrary\steamapps\common\FINAL FANTASY VII Steam Edition\NAudio.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Steamworks.NET">
+      <HintPath>D:\SteamLibrary\steamapps\common\FINAL FANTASY VII Steam Edition\Steamworks.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+  </ItemGroup>
+</Project>
