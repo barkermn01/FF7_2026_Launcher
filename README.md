@@ -1,6 +1,6 @@
 # FFVII Launcher Source
 
-This is a working source build decompiled from the debug version of the launcher shipped with the 2026 Steam Release of Final Fantasy VII.
+This is a working source build decompiled from the debug version of the launcher shipped with the 2026 Steam Release of Final Fantasy VII. with minor modifications for 7th heaven support and a nice to have feature of bypassing the launcher, also the sounds on the menu buttons are from the correct game.
 
 ## Origin
 
@@ -12,4 +12,4 @@ Run `build.bat` to compile using MSBuild from Visual Studio 2026.
 
 ## Legal Notice
 
-This is decompiled code from a commercial product. All rights belong to Square Enix. This repository is for educational and preservation purposes only.
+This is modification of the decompiled code from a commercial product. All rights belong to Square Enix. This repository is for educational and preservation purposes only.
